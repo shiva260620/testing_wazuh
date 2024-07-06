@@ -30,20 +30,26 @@ jobs:
           python -c "
           import requests
           import json
+          import sys
           
-          api_key = '${{ secrets.WAZUH_API_KEY }}'
-          url = 'https://YOUR_WAZUH_CLOUD_INSTANCE/api/v4/agents'
+          try:
+              api_key = '${{ secrets.WAZUH_API_KEY }}'
+              url = 'https://YOUR_WAZUH_CLOUD_INSTANCE/api/v4/agents'  # Replace with actual Wazuh Cloud API endpoint
 
-          headers = {
-              'Authorization': f'Bearer {api_key}',
-              'Content-Type': 'application/json'
-          }
+              headers = {
+                  'Authorization': f'Bearer {api_key}',
+                  'Content-Type': 'application/json'
+              }
 
-          response = requests.get(url, headers=headers)
+              response = requests.get(url, headers=headers)
 
-          if response.status_code == 200:
-              print('Successfully fetched data from Wazuh Cloud')
-              print(json.dumps(response.json(), indent=4))
-          else:
-              print(f'Failed to fetch data: {response.status_code} - {response.text}')
+              if response.status_code == 200:
+                  print('Successfully fetched data from Wazuh Cloud')
+                  print(json.dumps(response.json(), indent=4))
+              else:
+                  print(f'Failed to fetch data: {response.status_code} - {response.text}')
+                  sys.exit(1)
+          except Exception as e:
+              print(f'An error occurred: {str(e)}')
+              sys.exit(1)
           "
