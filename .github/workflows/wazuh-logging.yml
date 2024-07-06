@@ -34,7 +34,7 @@ jobs:
           
           try:
               api_key = '${{ secrets.WAZUH_API_KEY }}'
-              url = 'https://gplje7j30dkw.cloud.wazuh.com/api/v4/agents'  # Replace with actual Wazuh Cloud API endpoint
+              url = 'https://gplje7j30dkw.cloud.wazuh.com/api/v4/agents'  
 
               headers = {
                   'Authorization': f'Bearer {api_key}',
