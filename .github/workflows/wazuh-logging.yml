@@ -25,7 +25,7 @@ jobs:
 
       - name: Log activity to Wazuh Cloud
         env:
-          WAZUH_API_KEY: ${{ secrets.WAZUH_API_KEY }}
+          WAZUH_API_KEY: ${{ secrets.WAZUH_API_KEY2 }}
         run: |
           python -c "
           import requests
@@ -33,8 +33,8 @@ jobs:
           import sys
           
           try:
-              api_key = '${{ secrets.WAZUH_API_KEY }}'
-              url = 'https://gplje7j30dkw.cloud.wazuh.com/app/wazuh#/agents'  
+              api_key = '${{ secrets.WAZUH_API_KEY2 }}'
+              url = 'https://gplje7j30dkw.cloud.wazuh.com/app/v4/agents'  
 
               headers = {
                   'Authorization': f'Bearer {api_key}',
